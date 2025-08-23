@@ -1,0 +1,21 @@
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        temp=s.lower()
+        s=" ".join(i for i in temp if i.isalnum())
+        start=0
+        end=len(s)-1
+        while start<end:
+            if s[start]==s[end]:
+                start+=1
+                end-=1
+            else:
+                return False
+        return True
+
+        '''
+        import re
+
+def isPalindrome(s: str) -> bool:
+    s = re.sub(r'[^a-zA-Z0-9]', '', s).lower()
+    return s == s[::-1]
+'''
