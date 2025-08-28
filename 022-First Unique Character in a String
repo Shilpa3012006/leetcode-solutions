@@ -1,0 +1,20 @@
+from collections import Counter
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        freq=Counter(s)
+        for i, ch in enumerate(s):
+            if freq[ch]==1:
+                return i
+        return -1
+
+
+
+#both the sol;utions are obtimized
+        a=list(s)
+        dict={}
+        for i in range(len(a)):
+            dict[a[i]]=dict.get(a[i],0)+1
+        for i in range(len(a)):
+            if dict[a[i]]==1:
+                return i
+        return -1
