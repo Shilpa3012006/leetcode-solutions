@@ -1,0 +1,26 @@
+#both are more efficient codes
+1.
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        r=s.split()
+        freq={}
+        used=set()
+        if len(pattern)!=len(r):
+            return False
+        return len(set(pattern))==len(set(r))==len(set(zip(pattern,r)))
+        
+ 2.       
+        r=s.split()
+        freq={}
+        used=set()
+        if len(pattern)!=len(r):
+            return False
+        for i in range(len(pattern)):
+            if pattern[i] in freq and freq[pattern[i]] != r[i]:
+                return False
+            elif pattern[i] not in freq:
+                if r[i] in used:   # word already assigned to another pattern char
+                    return False
+                freq[pattern[i]] = r[i]
+                used.add(r[i])
+        return True
