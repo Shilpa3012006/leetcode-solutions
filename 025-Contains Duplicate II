@@ -1,0 +1,21 @@
+# 1st approch by using slide window + set (refer after learn slide window)
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        window = set()
+        for i in range(len(nums)):
+            if nums[i] in window:
+                return True
+            window.add(nums[i])
+            if len(window) > k:  # maintain window size <= k
+                window.remove(nums[i - k])
+        return False
+
+# 2nd approch is also efficient
+
+        freq={}
+        for i in range(len(nums)):
+            if nums[i] in freq:
+                if (i - freq[nums[i]]) <= k:   # FIXED
+                    return True
+            freq[nums[i]] = i   # update index each time
+        return False
