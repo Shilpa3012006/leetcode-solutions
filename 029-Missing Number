@@ -1,0 +1,12 @@
+#both are more efficient
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        n=len(nums)
+        total = n * (n + 1) // 2   # sum of 0..n
+        return total - sum(nums)    
+
+# approch 2       
+        res = n  # include n itself
+        for i in range(n):
+            res ^= i ^ nums[i]
+        return res
