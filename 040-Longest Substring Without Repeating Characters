@@ -1,0 +1,36 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        char_index_map = {}
+        left = 0
+        max_length = 0
+        
+        for right in range(len(s)):
+            # If duplicate found, move left pointer to right of the last occurrence
+            if s[right] in char_index_map and char_index_map[s[right]] >= left:
+                left = char_index_map[s[right]] + 1
+            
+            # Update the last seen index of current character
+            char_index_map[s[right]] = right
+            max_length = max(max_length, right - left + 1)
+        
+        return max_length
+
+
+#second approch(both are efficient)
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        char_set = set()
+        left = 0
+        max_length = 0
+        
+        for right in range(len(s)):
+            # Shrink window if duplicate character found
+            while s[right] in char_set:
+                char_set.remove(s[left])
+                left += 1
+            
+            # Add the current character and update max_length
+            char_set.add(s[right])
+            max_length = max(max_length, right - left + 1)
+        
+        return max_length
