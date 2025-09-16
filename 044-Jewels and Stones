@@ -1,0 +1,29 @@
+class Solution:
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:
+        jewels_set=set(jewels)
+        count=0
+        for s in stones:
+            if s in jewels:
+                count+=1
+        return count
+
+
+        count = 0
+        start = 0
+        end = len(stones) - 1
+
+        while start <= end:
+            if stones[start] in jewels:
+                count += 1
+            if start != end and stones[end] in jewels:
+                count += 1
+            start += 1
+            end -= 1
+
+        return count
+
+
+
+
+
+        
