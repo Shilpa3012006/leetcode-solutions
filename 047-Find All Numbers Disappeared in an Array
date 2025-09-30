@@ -1,0 +1,23 @@
+#more efficient TC-O(n) and SC-O(1)
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        n=len(nums)
+        for num in nums:
+            index=abs(num)-1
+            if nums[index]>0:
+                nums[index]=-nums[index]
+
+        res=[]
+        for i in range(n+1):
+            if nums[i]>0:
+                res.append(i+1)
+        return res
+
+#better efficient TC-O(n) and SC-O(1)
+from collections import Counter
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        n=len(nums)
+        ranges=list(range(1,n+1))
+        res=list(Counter(ranges)-Counter(nums))
+        return res
