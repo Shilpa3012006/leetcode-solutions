@@ -1,0 +1,50 @@
+nums=list(map(int,input().split()))
+n=len(nums)
+
+#brute force approch T.C=O(n^2) S.C=O(n)
+"""
+def is_sorted(nums):
+    for i in range(n-1):
+        if nums[i]>nums[i+1]:
+            return False
+    return True
+def check(nums):
+    for r in range(n):
+        rotated=nums[:r]+nums[r:]
+        if is_sorted(rotated):
+            return True
+    return False  
+
+# just to print
+ 
+if check(nums):
+    print("sorted and rotated")
+else:   
+    print("not sorted and rotated")
+"""
+#better approch T.C=O(n) S.C=O(1)
+"""
+def check(nums):
+    count=0
+    for i in range(n-1):
+        if nums[i]>nums[i+1]:
+            count+=1
+    if count==0 or (count==1 and nums[-1]<=nums[0]):
+        return True
+    return False
+
+if check(nums):
+    print("sorted and rotated")
+else:   
+    print("not sorted and rotated")
+    """
+
+#obtimal approch T.C=O(n) S.C=O(1) and as in leetcode
+class Solution:
+    def check(self, nums: List[int]) -> bool:
+        n=len(nums)
+        count=0
+        for i in range(n):
+            if nums[i]>nums[(i+1)%n]:
+                count+=1
+        return count<=1
