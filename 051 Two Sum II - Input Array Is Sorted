@@ -1,0 +1,26 @@
+# #optimal approch T.C O(n) S.C O(1)
+nums=list(map(int,input().split()))
+target=int(input())
+n=len(nums)
+i=0
+j=n-1
+while i<j:
+    summation=nums[i]+nums[j]
+    if summation==target:
+        print(list[i+1,j+1])
+        break
+    elif summation<target:
+        i+=1
+    else:
+        j-=1
+
+#brute force approch T.C O(n^2) S.C O(1)
+nums=list(map(int,input().split()))
+target=int(input())
+n=len(nums)
+for i in range(n):
+    for j in range(i+1,n):
+        summation=nums[i]+nums[j]
+        if summation==target:
+            print(list[i+1,j+1])
+            break
