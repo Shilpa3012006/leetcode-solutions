@@ -1,0 +1,12 @@
+#optimal approch T.C O(n) S.C O(n)
+
+nums=list(map(int,input().split()))
+n=len(nums)
+k=int(input())
+window_sum=sum(nums[:k])
+max_val=window_sum
+for i in range(n-k):
+    window_sum=window_sum-nums[i]+nums[i+k]
+    max_val=max(max_val,window_sum)
+print(max_val/k)
+
