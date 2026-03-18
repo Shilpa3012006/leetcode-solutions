@@ -1,0 +1,41 @@
+nums=list(map(int,input().split()))
+n=len(nums)
+
+#brute force approch Merge sort or any other sorting algorithm
+# T.C=O(nlogn) S.C=O(n)
+
+#better approch T.C=O(2n) S.C=O(1)
+count0=0
+count1=0
+count2=0
+
+for i in range(n):
+    if nums[i]==0:
+        count0+=1
+    elif nums[i]==1:
+        count1+=1
+    else:
+        count2+=1
+for i in range(count0):
+    nums[i]=0
+for i in range(count0,count0+count1):
+    nums[i]=1
+for i in range(count0+count1,n):
+    nums[i]=2
+print(nums)
+
+#optimal approch T.C O(n) S.C O(1)
+low=0
+mid=0
+high=n-1
+for i in range(n):
+    if nums[mid]==0:
+        nums[low],nums[mid]=nums[mid],nums[low]
+        mid+=1
+        low+=1
+    elif nums[mid]==1:
+        mid+=1
+    else:
+        nums[high],nums[mid]=nums[mid],nums[high]
+        high-=1
+print(nums)
