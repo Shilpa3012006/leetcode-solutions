@@ -1,0 +1,30 @@
+#brute force approch  T.C O(n^3) S.C O(1)
+nums=list(map(int,input().split()))
+n=len(nums)
+max_sum=float('-inf')
+for i in range(n):
+    for j in range(i+1,n):
+        sumation=sum(nums[i:j])
+        max_sum=max(sumation,max_sum)
+print(max_sum)
+
+#better approch T.C O(n^2) S.C O(1)
+
+max_sum = float('-inf')
+
+for i in range(n):
+    current_sum = 0
+    for j in range(i, n):
+        current_sum += nums[j] #only changes
+        max_sum = max(max_sum, current_sum)
+
+print(max_sum)
+
+# optimal approch T.C O(n) S.C O(1)
+current_sum=0
+for i in range(n):
+    current_sum+=nums[i]
+    max_sum=max(current_sum,max_sum)
+    if current_sum<0:
+        current_sum=0
+print(max_sum)
