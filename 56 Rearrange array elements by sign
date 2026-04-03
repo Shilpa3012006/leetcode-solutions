@@ -1,0 +1,29 @@
+#optimal approch T.C O(n) S.C O(n)
+nums=list(map(int,input().split()))
+n=len(nums)
+ans=[0]*n
+i=0
+j=1
+for num in nums:
+    if num>0:
+        ans[i]=num
+        i+=2
+    else:
+        ans[j]=num
+        j+=2
+print(ans)
+
+
+#brute force approch T.C O(2n) S.C O(n)
+# nums1=[]
+# nums2=[]
+# for num in nums:
+#     if num>0:
+#         nums1.append(num)
+#     else:
+#         nums2.append(num)
+# for k in range(n//2):
+#     nums[2*k]=nums1[k]
+#     nums[2*k+1]=nums2[k]
+        
+# print(nums)
