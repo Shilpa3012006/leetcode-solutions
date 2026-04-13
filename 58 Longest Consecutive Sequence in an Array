@@ -1,0 +1,46 @@
+# #brute force approch T.C O(n^2) S.C O(1)
+# nums=list(map(int,input().split()))
+# n=len(nums)
+# max_so_far=float('-inf')
+# for i in range(n):
+#     x=nums[i]
+#     count=1
+#     while x+1 in nums:
+#         x=x+1
+#         count+=1
+#     max_so_far=max(max_so_far,count)
+# print(max_so_far)
+    
+
+#better approch T.C O(nlogn) S.C O(1)
+nums=sorted(nums)
+n=len(nums)
+max_so_far=float('-inf')
+count=1
+for i in range(1,n):
+    if nums[i-1]==nums[i]:
+        continue
+    elif nums[i-1]+1==nums[i]:
+        count+=1
+    else:
+        max_so_far=max(max_so_far,count)
+        count=1
+max_so_far=max(max_so_far,count)
+print(max_so_far)
+
+
+#optimal approch T.C O(n) S.C O(n)
+nums=list(map(int,input().split()))
+n=len(nums)
+s=set(nums)
+max_so_far=float('-inf')
+for num in s:
+    if num-1 not in s:
+        x=num
+        count=1
+        while x+1 in s:
+            x=x+1
+            count+=1
+        max_so_far=max(max_so_far,count)
+print(max_so_far)
+
