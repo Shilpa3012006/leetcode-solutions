@@ -1,0 +1,37 @@
+#To generate the full Pascal's Triangle
+
+#Brute force approch using Type 1 T.C O(n^3) S.C O(1)
+n=int(input())
+
+def ncr(row,col):
+    res=1
+    for i in range(col):
+        res=res*(row-i)
+        res=res//(i+1)
+    return int(res)
+ans=[]
+for row in range(1,n+1):
+    templist=[]
+    for col in range(1,row+1):
+        templist.append(ncr(row-1,col-1))
+    ans.append(templist)
+print(ans)
+
+#optimised approch using Type 2 T.C O(n^2) S.C O(1)
+
+
+def ncr(row):
+    ans=1
+    templist=[1]
+
+    for i in range(1,row):
+        ans=ans*(row-i)
+        ans=ans//i
+        templist.append(ans)
+    return templist
+final_list=[]
+for i in range(1,n+1):
+    final_list.append(ncr(i))
+print(final_list)
+
+
