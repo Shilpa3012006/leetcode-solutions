@@ -1,0 +1,65 @@
+#T.C :O((log n)+k) where k is the number of occurrences of target
+nums = list(map(int, input().split()))
+target=int(input())
+n = len(nums)
+low=0
+high=n-1
+start=-1
+end=-1
+
+while low<=high:
+    mid=(low+high)//2
+    if nums[mid]==target:
+        start=mid
+        end=mid
+        while start-1>=0 and nums[start-1]==target:
+            start-=1
+        while end+1<n and nums[end+1]==target:
+            end+=1
+        
+        break
+    elif nums[mid]<target:
+        low=mid+1
+    else:
+        high=mid-1
+print(start,end)
+
+
+#optimal solution T.C O(log n)
+class Solution:
+    def searchRange(self, nums, target):
+        n = len(nums)
+
+        # Lower Bound
+        low, high = 0, n - 1
+        first = n
+
+        while low <= high:
+            mid = (low + high) // 2
+
+            if nums[mid] >= target:
+                first = mid
+                high = mid - 1
+            else:
+                low = mid + 1
+
+        # Target not present
+        if first == n or nums[first] != target:
+            return [-1, -1]
+
+        # Upper Bound
+        low, high = 0, n - 1
+        upper = n
+
+        while low <= high:
+            mid = (low + high) // 2
+
+            if nums[mid] > target:
+                upper = mid
+                high = mid - 1
+            else:
+                low = mid + 1
+
+        last = upper - 1
+
+        return [first, last]
