@@ -1,0 +1,21 @@
+from math import ceil
+class Solution:
+    def minimumRateToEatBananas(self, nums, h):
+        low = 1
+        high = max(nums)
+        K = high
+
+        while low <= high:
+            mid = (low + high) // 2
+
+            hours = 0
+            for num in nums:
+                hours += ceil(num / mid)
+
+            if hours <= h:
+                K = mid
+                high = mid - 1
+            else:
+                low = mid + 1
+
+        return K
