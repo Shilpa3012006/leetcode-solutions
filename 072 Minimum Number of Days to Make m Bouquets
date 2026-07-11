@@ -1,0 +1,28 @@
+class Solution:
+    def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
+        if m*k>len(bloomDay):
+            return -1
+
+        def possible(bloomDay,m,k,day):
+            count=0
+            no_of_bouquets=0
+            for i in range(len(bloomDay)):
+                if bloomDay[i]<=day:
+                    count+=1
+                else:
+                    no_of_bouquets+=count//k
+                    count=0
+            no_of_bouquets+=count//k
+            return no_of_bouquets>=m
+
+        low=min(bloomDay)
+        high=max(bloomDay)
+        ans=high
+        while low<=high:
+            mid=(low+high)//2
+            if possible(bloomDay,m,k,mid):
+                ans=mid
+                high=mid-1
+            else:
+                low=mid+1
+        return ans
