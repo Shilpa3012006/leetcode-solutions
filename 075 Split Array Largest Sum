@@ -1,0 +1,28 @@
+class Solution:
+    def splitArray(self, nums: List[int], k: int) -> int:
+        low=max(nums)
+        high=sum(nums)
+        ans=high
+        n=len(nums)
+            
+        #main logic
+        def ispossible(nums,mid):
+            count_subset=1
+            sum_of_nums=0
+            for i in range(n):
+                if sum_of_nums + nums[i] <= mid:
+                    sum_of_nums += nums[i]
+                else:
+                    count_subset += 1
+                    sum_of_nums = nums[i]
+            return count_subset
+
+        while low<=high:
+            mid=(low+high)//2
+            if ispossible(nums,mid)<=k:
+                ans=mid
+                high=mid-1
+            else:
+                low=mid+1
+        return ans 
+        #we can also print low as at the end of the loop low will be equal to ans
