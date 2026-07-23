@@ -1,0 +1,29 @@
+s=input()
+t=input()
+
+#bruteforce approach with T.C O(n^2) and S.C O(n)
+if sorted(s)==sorted(t):
+    print("true")
+    exit()
+print("false")
+
+#optimal approch
+if len(s)!=len(t):
+    print("false")
+    exit()
+freq1={}
+freq2={}
+for c1,c2 in zip(s,t):
+    freq1[c1]=freq1.get(c1,0)+1
+    freq2[c2]=freq2.get(c2,0)+1
+if len(freq1)!=len(freq2):
+    print("false")
+    exit()
+for key in freq1:
+    if freq1[key] not in freq2:
+        print("false")
+        exit()
+    if freq1[key]!=freq2[key]:
+        print("false")
+        exit()
+print("true")
