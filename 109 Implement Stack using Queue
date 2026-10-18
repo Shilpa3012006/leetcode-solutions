@@ -1,0 +1,31 @@
+class MyStack:
+
+    def __init__(self):
+        self.qStack=[]
+        
+
+    def push(self, x: int) -> None:
+        self.qStack.append(x)
+        for i in range(1,len(self.qStack)):
+            self.qStack.append(self.qStack[0])
+            self.qStack.pop(0)
+        
+    def pop(self) -> int:
+        return self.qStack.pop(0)
+        
+
+    def top(self) -> int:
+        return self.qStack[0]
+        
+
+    def empty(self) -> bool:
+        return len(self.qStack)==0
+        
+
+
+# Your MyStack object will be instantiated and called as such:
+# obj = MyStack()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.empty()
