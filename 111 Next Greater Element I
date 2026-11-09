@@ -1,0 +1,30 @@
+# 1st method with 1 arr
+class Solution:
+    def nextLargerElement(self, arr):
+        n=len(arr)
+        stack=[]
+        ans=[-1]*n
+        for i in range(n-1,-1,-1):
+            while(stack and stack[-1]<=arr[i]):
+                stack.pop()
+            if stack:
+                ans[i]=stack[-1]
+            stack.append(arr[i])
+        return ans
+
+# 2st method with 2 arr
+
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+            stack=[]
+            next_greater={}
+            for num in nums2:
+                while stack and num>stack[-1]:
+                    smaller=stack.pop()
+                    next_greater[smaller]=num
+                stack.append(num)
+            return [next_greater.get(num,-1) for num in nums1]
+            
+        
+
+   
