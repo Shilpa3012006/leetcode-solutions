@@ -1,0 +1,16 @@
+#optimal solution with T.C O(n) and S.C O(n)
+num=input()
+k=int(input())
+n=len(num)
+stack=[]
+if k>=n:
+    print(0)
+for i in range(n):
+    while stack and stack[-1]>num[i] and k>0:
+        stack.pop()
+        k-=1
+    stack.append(num[i])
+while k>0:
+    stack.pop()
+    k-=1
+print(''.join(stack).lstrip('0') or '0')
