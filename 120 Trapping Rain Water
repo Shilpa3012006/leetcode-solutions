@@ -1,0 +1,46 @@
+#using monotonic stack with T.C O(n) and S.C O(n)
+class Solution:
+    def trap(self, height: list[int]) -> int:
+        stack=[]
+        water=0
+        for i in range(len(height)):
+            while stack and height[i]>height[stack[-1]]:
+                bottom=stack.pop()
+                if not stack:
+                    break
+                left=stack[-1]
+                right=i
+                width=right-left-1
+                bounded_height=min(height[left],height[right])-height[bottom]
+                water+=width*bounded_height
+            stack.append(i)
+        return water
+
+#using prefix and suffix sum with T.C O(n) and S.C O(n)
+class Solution:
+    def prefix_sum(self,height):
+        n=len(height)
+        self.prefix_sum=[0]*n
+        self.prefix_sum[0]=height[0]
+        for i in range(1,n):
+            self.prefix_sum[i]=max(self.prefix_sum[i-1],height[i])
+        return self.prefix_sum
+    
+    def suffix_sum(self,height):
+        n=len(height)
+        self.suffix_sum=[0]*n
+        self.suffix_sum[n-1]=height[n-1]
+        for i in range(n-2,-1,-1):
+            self.suffix_sum[i]=max(self.suffix_sum[i+1],height[i])
+        return self.suffix_sum        
+
+    def trap(self, height: list[int]) -> int:
+        prefix_sum=self.prefix_sum(height)
+        suffix_sum=self.suffix_sum(height)
+        total=0
+        n=len(height)
+        for i in range(n):
+            if height[i]<prefix_sum[i] and height[i]<suffix_sum[i]:
+                total+=min(prefix_sum[i],suffix_sum[i])-height[i]
+        return total
+
